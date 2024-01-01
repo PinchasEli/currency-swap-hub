@@ -1,0 +1,26 @@
+.about {
+    align-items: center;
+    margin: 100px, auto;
+    row-gap: 10px;
+
+    .content {
+        .table {
+            width: 40vw;
+            row-gap: 10px;
+
+            .header {
+                justify-content: space-around;
+                font-weight: 800;
+            }
+
+            .table-row {
+                justify-content: space-around;
+            }
+
+            .table-cell {
+                flex: 1;
+                padding: 8px;
+            }
+        }
+    }
+}

@@ -1,0 +1,41 @@
+<div class="basic-input"
+  [class.disabled]="disabled">
+  <!-- <label>{{label}}<b *ngIf="required" [title]="REQUIRED_FIELD"> *</b></label> -->
+
+  <div class="flex-row"
+    [class.invalid]="control.touched && control.invalid">
+
+    <ng-container [ngSwitch]="type">
+        <input *ngSwitchCase="'digits'"
+            [name]="name"
+            [formControl]="control"
+            [readonly]="disabled"
+            [attr.maxLength]="maxLength"
+            [style.direction]="direction"
+            (keyup.enter)="enter.emit()"
+            (blur)="blur.emit()">
+
+        <input *ngSwitchCase="'number'"
+            [type]="type"
+            [formControl]="control"
+            [name]="name"
+            [step]="0.01"
+            [min]="step"
+            [readonly]="disabled"
+            [style.direction]="direction"
+            (keyup.enter)="enter.emit()"
+            (blur)="blur.emit()">
+
+        <input *ngSwitchDefault
+            [type]="type"
+            [formControl]="control"
+            [name]="name"
+            [readonly]="disabled"
+            [attr.maxLength]="maxLength"
+            (keyup.enter)="enter.emit()"
+            (blur)="blur.emit()">
+    </ng-container>
+
+  </div>
+  <ng-content></ng-content>
+</div>

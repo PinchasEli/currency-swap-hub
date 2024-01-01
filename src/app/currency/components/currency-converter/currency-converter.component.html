@@ -1,0 +1,41 @@
+<div class="currency-converter flex-col">
+    <div class="title">
+        <span>Currency Converter</span>
+    </div>
+    <div class="content flex-col">
+        <!-- <basic-input
+            [type]="'number'"
+            [direction]="'ltr'"
+            [required]="true"
+            [control]="form.get('sum')"></basic-input> -->
+
+        <input class="sum-currency"
+            [type]="'number'"
+            [formControl]="form.get('sum')"
+            [step]="0.01"
+            [min]="0.01">
+
+        <div class="select-content flex-row">
+            <div class="flex-row">
+                <span>From</span>
+                <select-input
+                    [control]="form.get('from')"
+                    [options]="options"></select-input>
+            </div>
+
+            <div class="flex-row">
+                <span>To</span>
+                <select-input
+                    [control]="form.get('to')"
+                    [options]="options"></select-input>
+            </div>
+        </div>
+
+        <div *ngIf="form.valid && conversion" 
+            class="result-content flex-row">
+            <span>{{getFrom}}</span>
+            =
+            <span>{{getConversion}}</span>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,8 @@
+<div class="select-item">
+    <select
+        [formControl]="control">
+        <option *ngFor="let item of options" 
+            [value]="item.value">{{item.text}}
+        </option>
+    </select>
+</div>

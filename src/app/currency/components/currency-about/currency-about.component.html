@@ -1,0 +1,23 @@
+<div class="about flex-col">
+    <h1>History of conversion </h1>
+
+    <div class="content">
+        <div class="table flex-col">
+            <div class="header flex-row">
+                <span class="table-cell">Sum</span>
+                <span class="table-cell">From</span>
+                <span class="table-cell">To</span>
+                <span class="table-cell">Conversion</span>
+                <span class="table-cell">Date</span>
+            </div>
+
+            <div class="table-row flex-row" *ngFor="let item of historyData">
+                <span class="table-cell">{{item.sum}}</span>
+                <span class="table-cell">{{item.from}}</span>
+                <span class="table-cell">{{item.to}}</span>
+                <span class="table-cell">{{item.conversion}}</span>
+                <span class="table-cell">{{item.date | date:'dd/MM/yyyy HH:mm:ss'}}</span>
+            </div>
+        </div>
+    </div>
+</div>

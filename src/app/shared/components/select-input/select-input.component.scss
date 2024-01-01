@@ -1,0 +1,17 @@
+.select-item {
+    select {
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 0.8rem;
+    
+        &:hover {
+            border-color: #aaa;
+        }
+    
+        &:focus {
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        }
+    }
+}

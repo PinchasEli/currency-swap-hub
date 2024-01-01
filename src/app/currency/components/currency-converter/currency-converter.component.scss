@@ -1,0 +1,47 @@
+.currency-converter {
+    align-items: center;
+    margin: 100px, auto;
+    row-gap: 10px;
+
+    .title {
+        span {
+           color: black;
+           font-size: 2rem; 
+        }
+    }
+
+    .content {
+        width: 40vw;
+        align-items: center;
+
+        row-gap: 10px;
+
+        .sum-currency {
+            width: 20%;
+            padding: 10px 20px;
+            border-radius: 8px;
+        }
+
+        .select-content {
+            width: 40%;
+            align-items: center;
+
+            justify-content: space-around;
+
+            > div {
+                align-items: center;
+
+                column-gap: 10px;
+            }
+        }
+
+        .result-content {
+            width: 50%;
+            justify-content: space-around;
+            color: #03a9f4;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+    }
+}
