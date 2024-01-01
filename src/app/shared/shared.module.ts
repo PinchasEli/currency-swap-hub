@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BasicInputComponent } from './components/basic-input/basic-input.component';
+
 import { SelectInputComponent } from './components/select-input/select-input.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -11,7 +11,6 @@ const modules = [
 const pipes = [];
 
 const components = [
-  BasicInputComponent,
   SelectInputComponent
 ];
 
