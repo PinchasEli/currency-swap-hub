@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { SelectItem } from '../../models/select-item.interface';
 import { FormControl } from '@angular/forms';
+
+import { SelectItem } from '../../models/select-item.interface';
 
 @Component({
   selector: 'select-input',

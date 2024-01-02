@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';
+
 import { HistoryDataService } from '../../services/history-data.service';
+
 import { HistoryItem } from '../../models/history-item.interface';
 
 @Component({
