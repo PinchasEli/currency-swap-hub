@@ -8,23 +8,16 @@ const modules = [
   CommonModule
 ];
 
-const pipes = [];
-
 const components = [
   SelectInputComponent
 ];
 
-const directives = [];
 
 @NgModule({
   declarations: [
     components,
-    // pipes,
-    // directives,
   ],
-  providers: [
-    // pipes
-  ],
+  providers: [],
   imports: [
     ReactiveFormsModule,
     modules,
@@ -32,8 +25,6 @@ const directives = [];
   exports: [
     modules,
     components,
-    // pipes,
-    // directives
   ]
 })
 export class SharedModule { }
