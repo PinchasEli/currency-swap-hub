@@ -27,10 +27,6 @@ export class HistoryDataService {
     return this.historyData$.value;
   }
 
-  private saveToLocalStorage(data: HistoryItem[]) {
-    localStorage.setItem(this.localStorageKey, JSON.stringify(data));
-  }
-
   setData(data: any) {
     this.historyData$.next(data);
     this.saveToLocalStorage(data);
@@ -40,5 +36,9 @@ export class HistoryDataService {
     const currentData = this.getHistoryDataValue();
     const updatedData = [...currentData, newItem];
     this.setData(updatedData);
+  }
+
+  private saveToLocalStorage(data: HistoryItem[]) {
+    localStorage.setItem(this.localStorageKey, JSON.stringify(data));
   }
 }

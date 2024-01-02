@@ -20,7 +20,6 @@ export class CurrencyService {
 
   get(params: any = {}): Observable<any> {
     params = { access_key: this.accessKey, ...params };
-    console.log('this.baseUrl :>> ', this.baseUrl);
     return this.http.get<any>(`${this.baseUrl}`, { params });
   }
 
