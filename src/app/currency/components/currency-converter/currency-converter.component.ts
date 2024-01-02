@@ -4,8 +4,9 @@ import { Subscription, debounceTime } from 'rxjs';
 import { map, get } from 'lodash-es';
 
 import { CurrencyService } from '../../services/currency.service';
-import { SelectItem } from 'src/app/shared/models/select-item.interface';
 import { HistoryDataService } from '../../services/history-data.service';
+
+import { SelectItem } from 'src/app/shared/models/select-item.interface';
 
 @Component({
   selector: 'app-currency-converter',
