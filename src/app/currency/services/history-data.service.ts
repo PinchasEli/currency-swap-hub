@@ -9,7 +9,7 @@ import { HistoryItem } from '../models/history-item.interface';
 
 export class HistoryDataService {
 
-  private historyData$ = new BehaviorSubject([]);
+  private historyData$ = new BehaviorSubject<HistoryItem[]>([]);
   private localStorageKey = 'historyData';
 
   constructor() {
@@ -27,7 +27,7 @@ export class HistoryDataService {
     return this.historyData$.value;
   }
 
-  setData(data: any) {
+  setData(data: HistoryItem[]) {
     this.historyData$.next(data);
     this.saveToLocalStorage(data);
   }

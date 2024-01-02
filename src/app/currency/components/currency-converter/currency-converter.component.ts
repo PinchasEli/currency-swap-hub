@@ -34,7 +34,7 @@ export class CurrencyConverterComponent implements OnInit, OnDestroy {
     this.currencyService.get({ format: 1 }).subscribe(
       result => {
         this.dataCurrency = result;
-        this.options = map(result.rates, (value: any, key: any) => ({ value: key, text: key }));
+        this.options = map(result.rates, (value: number, key: string) => ({ value: key, text: key }));
       }
     );
   }
@@ -55,7 +55,7 @@ export class CurrencyConverterComponent implements OnInit, OnDestroy {
   }
   
   get getConversion () {
-    return `${this.conversion} ${this.form.get('from')?.value}`
+    return `${this.conversion} ${this.form.get('to')?.value}`
   }
 
   private calculateCurrency() {

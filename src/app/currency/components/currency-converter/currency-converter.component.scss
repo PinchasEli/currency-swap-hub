@@ -13,7 +13,6 @@
     .content {
         width: 40vw;
         align-items: center;
-
         row-gap: 10px;
 
         .sum-currency {
@@ -36,8 +35,9 @@
         }
 
         .result-content {
-            width: 50%;
-            justify-content: space-around;
+            width: 80%;
+            justify-content: center;
+            column-gap: 10px;
             color: #03a9f4;
             font-size: 2rem;
             font-weight: 700;
