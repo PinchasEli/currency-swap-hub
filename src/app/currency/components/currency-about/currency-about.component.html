@@ -12,10 +12,12 @@
             </div>
 
             <div class="table-row flex-row" *ngFor="let item of historyData">
-                <span class="table-cell">{{item.sum}}</span>
+                <span class="table-cell"
+                    [class.small-font]="item.sum.length > 6">{{item.sum}}</span>
                 <span class="table-cell">{{item.from}}</span>
                 <span class="table-cell">{{item.to}}</span>
-                <span class="table-cell">{{item.conversion}}</span>
+                <span class="table-cell"
+                    [class.small-font]="item.conversion.length > 6">{{item.conversion}}</span>
                 <span class="table-cell">{{item.date | date:'dd/MM/yyyy HH:mm:ss'}}</span>
             </div>
         </div>

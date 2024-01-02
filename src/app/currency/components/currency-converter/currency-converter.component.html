@@ -1,7 +1,8 @@
 <div class="currency-converter flex-col">
-    <div class="title">
+    <div class="title flex-row">
         <span>Currency Converter</span>
     </div>
+
     <div class="content flex-col">
         <input class="sum-currency"
             [type]="'number'"
@@ -26,10 +27,13 @@
         </div>
 
         <div *ngIf="form.valid && conversion" 
-            class="result-content flex-row">
-            <span>{{getFrom}}</span>
-            =
-            <span>{{getConversion}}</span>
+            class="result-content flex-col">
+            <span>As of {{ getDateGate | date:'dd/MM/yyyy' }}</span>
+            <div class="result flex-row">
+                <span>{{getFrom}}</span>
+                <i class="fa-solid fa-money-bill-transfer"></i>
+                <span>{{getConversion}}</span>
+            </div>
         </div>
     </div>
 </div>

@@ -6,20 +6,60 @@
     .content {
         .table {
             width: 40vw;
-            row-gap: 10px;
+            border-radius: 10px;
+            border: 1px solid #03a9f4;
+            background: aliceblue;
 
             .header {
                 justify-content: space-around;
                 font-weight: 800;
+                border-bottom: 1px solid #03a9f4;
+
+                .table-cell {
+                    flex: 1;
+                    padding: 10px 5px;
+
+                    &:last-child {
+                        flex: 2;
+                    }
+                }
             }
 
             .table-row {
                 justify-content: space-around;
-            }
+                border-bottom: 1px solid #03a9f4;
 
-            .table-cell {
-                flex: 1;
-                padding: 8px;
+                .table-cell {
+                    flex: 1;
+                    padding: 8px;
+                    
+                    &:last-child {
+                        flex: 2;
+                    }
+                }
+
+                &:hover {
+                    font-weight: 700;
+                    background: #206e92;
+                }
+
+                &:last-child {
+                    border-bottom: unset;
+                }
+            }
+        }
+    }
+
+    @media (max-width: 1000px) {
+        .content {
+            .table {
+                width: 90vw;
+                
+                .table-row {
+                    .small-font {
+                        font-size: 0.8rem;
+                    }
+                }
             }
         }
     }

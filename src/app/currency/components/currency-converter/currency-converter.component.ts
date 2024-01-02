@@ -58,6 +58,10 @@ export class CurrencyConverterComponent implements OnInit, OnDestroy {
     return `${this.conversion} ${this.form.get('to')?.value}`
   }
 
+  get getDateGate() {
+    return this.dataCurrency?.date ? new Date(this.dataCurrency.date) : new Date();
+  }
+
   private calculateCurrency() {
     const fromSymbol = this.form.get('from')?.value
     const toSymbol = this.form.get('to')?.value
