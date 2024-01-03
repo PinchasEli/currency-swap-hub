@@ -7,10 +7,9 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 Clone the project 
 Enter the project dir.
 
-In terminal:
-npm i or npm  install
+In terminal: npm  install
 
-Run `ng serve OR ng serve --ssl false` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Run `ng serve OR ng serve --ssl false` for a dev server. Navigate to `http://localhost:4200/`.  
 
 Main page:
 - HTTP:
