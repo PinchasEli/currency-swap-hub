@@ -9,7 +9,7 @@ Enter the project dir.
 
 In terminal: npm  install
 
-Run `ng serve OR ng serve --ssl false` for a dev server. Navigate to `http://localhost:4200/`.  
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`.  
 
 Main page:
 - HTTP:
