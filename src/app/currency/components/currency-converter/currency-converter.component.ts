@@ -7,6 +7,7 @@ import { CurrencyService } from '../../services/currency.service';
 import { HistoryDataService } from '../../services/history-data.service';
 
 import { SelectItem } from 'src/app/shared/models/select-item.interface';
+import { Currency } from '../../models/currency.interface';
 
 @Component({
   selector: 'app-currency-converter',
@@ -19,8 +20,9 @@ export class CurrencyConverterComponent implements OnInit, OnDestroy {
   options: SelectItem[];
   conversion: string;
 
+  private currencyData: any;
+  private loadCurrencyDataSubscription: Subscription;
   private subscription: Subscription;
-  private dataCurrency: any;
 
   constructor(private fb: FormBuilder,
               private currencyService: CurrencyService,
@@ -30,16 +32,10 @@ export class CurrencyConverterComponent implements OnInit, OnDestroy {
       to: [null, [Validators.required]],
       sum: [null, [Validators.required]],
     });
-
-    this.currencyService.get({ format: 1 }).subscribe(
-      result => {
-        this.dataCurrency = result;
-        this.options = map(result.rates, (value: number, key: string) => ({ value: key, text: key }));
-      }
-    );
   }
 
   ngOnInit() {
+    this.getCurrencyData();
     this.subscription = this.form.valueChanges
       .pipe(debounceTime(500))
       .subscribe(_ => this.form.valid && this.calculateCurrency());
@@ -59,14 +55,14 @@ export class CurrencyConverterComponent implements OnInit, OnDestroy {
   }
 
   get getDateGate() {
-    return this.dataCurrency?.date ? new Date(this.dataCurrency.date) : new Date();
+    return this.currencyData?.date ? new Date(this.currencyData.date) : new Date();
   }
 
   private calculateCurrency() {
     const fromSymbol = this.form.get('from')?.value
     const toSymbol = this.form.get('to')?.value
-    const fromValue = get(this.dataCurrency.rates, fromSymbol);
-    const toValue = get(this.dataCurrency.rates, toSymbol);
+    const fromValue = get(this.currencyData.rates, fromSymbol);
+    const toValue = get(this.currencyData.rates, toSymbol);
     const sum = this.form.get('sum')?.value || 1;
 
     this.conversion = (sum * (toValue / fromValue)).toFixed(2);
@@ -77,5 +73,15 @@ export class CurrencyConverterComponent implements OnInit, OnDestroy {
       conversion: this.conversion,
       date: new Date()
     });
+  }
+
+  private getCurrencyData() {
+    this.loadCurrencyDataSubscription = this.currencyService.done
+      .subscribe((data: Currency) => {
+        this.currencyData = data;
+        this.options = map(this.currencyData.rates, (value: number, key: string) => ({ value: key, text: key }));
+        this.loadCurrencyDataSubscription?.unsubscribe();
+      });
+    this.currencyService.getData();
   }
 }
