@@ -4,24 +4,21 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Clone the project 
+Enter the project dir.
 
-## Code scaffolding
+In terminal: npm  install
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Run `ng serve OR ng serve --ssl false` for a dev server. Navigate to `http://localhost:4200/`.  
 
-## Build
+Main page:
+- HTTP:
+    - The app send request to backend one time per day after we over the 10:00AM.
+    - The app save on localStorge the currencyData.
+-  The page is responsive for mocile device. 
+![image](https://github.com/PinchasEli/currency-swap-hub/assets/20665671/c3c1da84-3ed0-481b-a9d7-2d918cf5c2e3)
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+About Page:
+- The app save on localStorge the historyData and display on table.
+![image](https://github.com/PinchasEli/currency-swap-hub/assets/20665671/f5637450-3d85-4d67-a297-b4e78812f522)
