@@ -20,9 +20,8 @@ export class CurrencyConverterComponent implements OnInit, OnDestroy {
   options: SelectItem[];
   conversion: string;
 
-  private currencyData: any;
-  private loadCurrencyDataSubscription: Subscription;
-  private subscription: Subscription;
+  private currencyData: Currency | null;
+  private subscriptions: Subscription[];
 
   constructor(private fb: FormBuilder,
               private currencyService: CurrencyService,
@@ -35,14 +34,19 @@ export class CurrencyConverterComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.getCurrencyData();
-    this.subscription = this.form.valueChanges
-      .pipe(debounceTime(500))
-      .subscribe(_ => this.form.valid && this.calculateCurrency());
+    this.subscriptions = [
+      this.form.valueChanges
+        .pipe(debounceTime(500))
+        .subscribe(_ => this.form.valid && this.calculateCurrency()),
+      this.currencyService.getData().subscribe(data => {
+        this.currencyData = data;
+        this.options = map(this.currencyData?.rates, (value: number, key: string) => ({ value: key, text: key }));
+      })
+    ];
   }
 
   ngOnDestroy(): void {
-      this.subscription.unsubscribe();
+      this.subscriptions.map(s => s.unsubscribe());
   }
 
   get getFrom() {
@@ -61,8 +65,8 @@ export class CurrencyConverterComponent implements OnInit, OnDestroy {
   private calculateCurrency() {
     const fromSymbol = this.form.get('from')?.value
     const toSymbol = this.form.get('to')?.value
-    const fromValue = get(this.currencyData.rates, fromSymbol);
-    const toValue = get(this.currencyData.rates, toSymbol);
+    const fromValue = get(this.currencyData?.rates, fromSymbol);
+    const toValue = get(this.currencyData?.rates, toSymbol);
     const sum = this.form.get('sum')?.value || 1;
 
     this.conversion = (sum * (toValue / fromValue)).toFixed(2);
@@ -73,15 +77,5 @@ export class CurrencyConverterComponent implements OnInit, OnDestroy {
       conversion: this.conversion,
       date: new Date()
     });
-  }
-
-  private getCurrencyData() {
-    this.loadCurrencyDataSubscription = this.currencyService.done
-      .subscribe((data: Currency) => {
-        this.currencyData = data;
-        this.options = map(this.currencyData.rates, (value: number, key: string) => ({ value: key, text: key }));
-        this.loadCurrencyDataSubscription?.unsubscribe();
-      });
-    this.currencyService.getData();
   }
 }

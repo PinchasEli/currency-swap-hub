@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { EventEmitter, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 import { environment } from 'src/environments/environment';
 import { Currency } from '../models/currency.interface';
@@ -11,50 +11,53 @@ import { Currency } from '../models/currency.interface';
 
 export class CurrencyService {
 
-  done: EventEmitter<any> = new EventEmitter();
   headers = new HttpHeaders().set('Content-Type', 'application/json');
+  
+  private currencyData$ = new BehaviorSubject<Currency | null>(null);
 
   private baseUrl = `${environment.serverUrl}`;
   private accessKey = `${environment.accessKey}`;
   private localStorageKey = 'currencyData';
-  private currencyData:  Currency;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.checkCurrencyData();
+  }
 
   get(params: any = {}): Observable<any> {
     params = { access_key: this.accessKey, ...params };
     return this.http.get<any>(`${this.baseUrl}`, { params });
   }
 
-  getData() {
-    this.checkCurrencyData();
+  getData(): Observable<Currency | null> {
+    return this.currencyData$.asObservable();
   }
 
   private checkCurrencyData() {
     const storedCurrencyData = localStorage.getItem(this.localStorageKey);
     let needRefresh = true;
+    let currencyData;
+    
     if (storedCurrencyData) {
-      this.currencyData = JSON.parse(storedCurrencyData)
-      needRefresh = this.needRefresh();
+      currencyData = JSON.parse(storedCurrencyData);
+      needRefresh = this.needRefresh(currencyData);
     }
 
     if (needRefresh) {
       this.get({ format: 1 }).subscribe(result => {
-        this.currencyData = result
         this.saveToLocalStorage(result);
-        this.done.emit(this.currencyData);
+        this.currencyData$.next(result);
       });
     }
     else {
-      this.done.emit(this.currencyData);
+      this.currencyData$.next(currencyData);
     }
   }
 
-  private needRefresh(): boolean {
-    if (!this.currencyData?.date) return true;
+  private needRefresh(currencyData: Currency): boolean {
+    if (!currencyData?.date) return true;
 
     const currentDate = new Date();
-    const lastTimeUpdated = new Date(this.currencyData.date);
+    const lastTimeUpdated = new Date(currencyData.date);
     return currentDate.getHours() >= 10 && currentDate.getDate() > lastTimeUpdated.getDate();
   }
 
