@@ -12,14 +12,12 @@ import { Currency } from '../models/currency.interface';
 export class CurrencyService {
 
   done: EventEmitter<any> = new EventEmitter();
+  headers = new HttpHeaders().set('Content-Type', 'application/json');
 
   private baseUrl = `${environment.serverUrl}`;
-  private accessKey = `050beeaad0ad5cda72460c6758d5a11e`;
-  // private accessKey = `c19bb18beec503922fd1708c62411bdf`;
+  private accessKey = `${environment.accessKey}`;
   private localStorageKey = 'currencyData';
   private currencyData:  Currency;
-
-  headers = new HttpHeaders().set('Content-Type', 'application/json');
 
   constructor(private http: HttpClient) {}
 
@@ -56,13 +54,8 @@ export class CurrencyService {
     if (!this.currencyData?.date) return true;
 
     const currentDate = new Date();
-    const lastTimeUpdated = new Date(this.currencyData?.date) || Date.now();
-    return this.isCurrentTime() && currentDate.getDate() > lastTimeUpdated.getDate();
-  }
-
-  private isCurrentTime() {
-    const currentDate = new Date();
-    return currentDate.getHours() >= 8 && currentDate.getMinutes() >= 0;
+    const lastTimeUpdated = new Date(this.currencyData.date);
+    return currentDate.getHours() >= 10 && currentDate.getDate() > lastTimeUpdated.getDate();
   }
 
   private saveToLocalStorage(data: Currency) {
